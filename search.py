@@ -22,7 +22,7 @@ for user in foundUsers - searchedUsers:
         print(currentURL)
         previousURL = currentURL
         text = requests.get(currentURL).text
-        possibleNextURL = re.findall('https://[^/%  ]*.tumblr.com/post/\d*', text)
+        possibleNextURL = re.findall('https://[^/%\d]*.tumblr.com/post/\d*', text)
         for link in possibleNextURL:
             if link not in searchedLinks:
                 currentURL = link # Finds URLS of posts by same user we're currently searching
@@ -54,4 +54,4 @@ foundUsersFile.write(foundUserList)
 
 searchedLinksFile.truncate(0)
 searchedLinksList = """{}""".format("\n".join(list(searchedLinks)[1:]))
-foundUsersFile.write(foundUserList)
+searchedLinksFile.write(foundUserList)
